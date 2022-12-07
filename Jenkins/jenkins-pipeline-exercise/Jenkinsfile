@@ -3,21 +3,21 @@ pipeline {
     stages {
         stage('stage1') {
             steps {
-                sh ''' git clone https://gitlab.com/qacdevops/chaperootodo_client.git'''
+                sh "git clone https://gitlab.com/qacdevops/chaperootodo_client.git"
             }
         }
         stage('stage2') {
             steps {
-              sh '''sudo apt update
-                    sudo apt install -y curl 
+              sh "sudo apt-get update
+                    sudo apt install  curl -y
                     curl https://get.docker.com | sudo bash
-                    sudo usermod -aG docker $(whoami)'''
+                    sudo usermod -aG docker $(whoami)"
 
             }
         }
         stage('stage3') {
             steps {
-                sh '''sudo docker-compose pull && sudo -E DB_PASSWORD=${DB_PASSWORD} docker-compose up -d'''
+                sh "sudo docker-compose pull && sudo -E DB_PASSWORD=${DB_PASSWORD} docker-compose up -d"
             }
         }
     }
