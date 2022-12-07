@@ -8,8 +8,8 @@ pipeline {
         }
         stage('stage2') {
             steps {
-              sh '''sudo apt-get update
-                    sudo apt install curl -y
+              sh '''sudo apt update
+                    sudo apt install -y curl 
                     curl https://get.docker.com | sudo bash
                     sudo usermod -aG docker $(whoami)'''
 
