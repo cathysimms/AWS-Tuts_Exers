@@ -1,8 +1,8 @@
 pipeline {
     agent any
-    environment {
-        DB_PASSWORD = 'db_password'
-    }
+    // environment {
+    //     DB_PASSWORD = credentials('DATABASE_PASSWORD')
+    // }
     stages {
         stage('stage1: Clone Git Repo') {
             steps {
@@ -23,9 +23,12 @@ pipeline {
             }
         }
         stage('stage3: Deploy Application') {
+            
             steps {
-                sh "sudo docker-compose pull && sudo -E DB_PASSWORD=${DB_PASSWORD} docker-compose up -d "
-            }
+                withCredentials([string(credentialsId: 'DATABASE_PASSWORD', variable: 'DB_PASSWORD')]) {
+                    sh "sudo docker-compose pull && sudo docker-compose up -d "
+                    }
+                }
         }
     }
 }
