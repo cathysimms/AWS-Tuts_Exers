@@ -4,12 +4,12 @@ pipeline {
         DB_PASSWORD = 'db_password'
     }
     stages {
-        stage('stage1') {
+        stage('stage1: Clone Git Repo') {
             steps {
                 sh "git clone https://gitlab.com/qacdevops/chaperootodo_client.git"
             }
         }
-        stage('stage2') {
+        stage('stage2: Install Docker & Docker Compose') {
             steps {
               sh "sudo apt-get update"
               sh "sudo apt install  curl -y"
@@ -22,7 +22,7 @@ pipeline {
 
             }
         }
-        stage('stage3') {
+        stage('stage3: Deploy Application') {
             steps {
                 sh "sudo docker-compose -f chaperootodo_client/docker-compose.yaml pull  && sudo -E DB_PASSWORD=${DB_PASSWORD} docker-compose -f chaperootodo_client/docker-compose.yaml up -d "
             }
