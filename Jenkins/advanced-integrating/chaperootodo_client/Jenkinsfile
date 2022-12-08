@@ -7,11 +7,15 @@ pipeline{
         stages{
             stage('Build Image'){
                 steps{
-                    script{
+                    dir('Jenkins/advanced-integrating/chaperootodo_client') {
+                        script{
                         if (env.rollback == 'false'){
                             image = docker.build("cathysimms/chaperoo-frontend")
                         }
                     }
+ 
+}
+                    
                 }
             }
             stage('Tag & Push Image'){
