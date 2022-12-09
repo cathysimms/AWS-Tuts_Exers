@@ -1,0 +1,3 @@
+https://github.com/cathysimms/jenkins-scm-database
+https://github.com/cathysimms/jenkins-scm-frontend
+https://github.com/cathysimms/jenkins-scm-backend
