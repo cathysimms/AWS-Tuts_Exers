@@ -37,3 +37,8 @@
       name: nginx
       state: absent
       update_cache: true
+
+  - name: "Stop nginx services"
+    service:
+      name: nginx
+      state: stopped
