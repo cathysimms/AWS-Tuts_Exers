@@ -7,13 +7,20 @@
       name: nginx
       state: present
       update_cache: true
+    register: nginxinstallvar
+    # failed_when: nginxinstallvar.cache_update_time > 1
+
+  - name: nginx debug
+    debug:
+      var: nginxinstallvar
 
   - name: Copy nginx file over
     copy:
       src: nginx.conf
       dest: /etc/nginx/nginx.conf
     register: nginx_config
-    failed_when: nginx_config.diff.before.path == nginx_config.diff.after.path
+    # when: nginx_config.src == nginx_config.dest 
+    # failed_when: nginx_config.diff.before.path == nginx_config.diff.after.path
 
   - name: print info from copy nginx file over
     debug:
@@ -24,3 +31,9 @@
       name: nginx
       state: restarted
     when: nginx_config.changed == true
+
+  - name: Uninstall nginx
+    apt:
+      name: nginx
+      state: absent
+      update_cache: true
