@@ -8,7 +8,7 @@
       state: present
       update_cache: true
     register: nginxinstallvar
-    # failed_when: nginxinstallvar.cache_update_time > 1
+    failed_when: nginxinstallvar.cache_update_time > 1
 
   - name: nginx debug
     debug:
