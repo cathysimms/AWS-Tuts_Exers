@@ -2,8 +2,8 @@ all:
   children:
     test:
       hosts:
-        ec2-34-240-157-206.eu-west-1.compute.amazonaws.com:
-        ec2-54-76-1-81.eu-west-1.compute.amazonaws.com:
+        ip-172-31-46-64.eu-west-1.compute.internal:
+        ip-172-31-33-137.eu-west-1.compute.internal:
       vars:
         ansible_user: ubuntu
         ansible_ssh_private_key_file: '~/.ssh/id_rsa'
