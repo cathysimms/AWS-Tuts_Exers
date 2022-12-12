@@ -10,6 +10,11 @@
     register: nginxinstallvar
     # failed_when: nginxinstallvar.cache_update_time > 1
 
+  - name: Start NGINX Service
+    service:
+      name: nginx
+      state: started
+
   - name: nginx debug
     debug:
       var: nginxinstallvar
