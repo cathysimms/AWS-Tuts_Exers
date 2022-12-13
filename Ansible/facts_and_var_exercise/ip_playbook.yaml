@@ -1,0 +1,9 @@
+---
+- hosts: all
+  become: true
+  tasks:
+  
+  - name: Create file with host IP
+    copy:
+      dest: /home/ubuntu/file1
+      content: {{ inventory_hostname }}
