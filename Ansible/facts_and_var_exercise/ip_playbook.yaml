@@ -1,9 +1,11 @@
 ---
 - hosts: all
   become: true
+  vars:
+    host_ip: "{{ inventory_hostname }}"
   tasks:
   
   - name: Create file with host IP
     copy:
       dest: /home/ubuntu/file1
-      content: {{ inventory_hostname }}
+      content: "{{ host_ip }}"
