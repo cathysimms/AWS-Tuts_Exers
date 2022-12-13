@@ -1,0 +1,4 @@
+all:
+  hosts:
+    ip-172-31-46-64.eu-west-1.compute.internal:
+    ip-172-31-33-137.eu-west-1.compute.internal:
