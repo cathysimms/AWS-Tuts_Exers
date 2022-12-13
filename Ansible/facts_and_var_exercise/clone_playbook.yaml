@@ -5,6 +5,6 @@
   - name: Clone Github Repo
     git:
       repo: https://github.com/cathysimms/ansible-repo.git
-      dest: /home/ubuntu/repos
+      dest: /home/ubuntu/repos/
       clone: yes
       update: yes 
