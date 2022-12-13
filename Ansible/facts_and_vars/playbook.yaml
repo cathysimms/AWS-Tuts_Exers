@@ -1,6 +1,9 @@
 ---
 - hosts: all
   become: true
+  vars:
+    path_to_nginx_conf: "./nginx.conf"
+    nginx_message: "Hello from Ansible on {{ inventory_hostname }}"
   tasks:
   - name: Install NGINX
     apt:
@@ -18,7 +21,7 @@
       notify: Restart nginx
 
   handlers:
-  - name: "Restart nginx"
+  - name: Restart nginx
     service: 
-      name: "nginx"
-      state: "restarted"
+      name: nginx
+      state: restarted
