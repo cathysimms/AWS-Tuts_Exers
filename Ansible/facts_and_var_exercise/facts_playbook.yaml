@@ -1,0 +1,8 @@
+---
+- hosts: all
+  become: true
+  tasks:
+  - name: "Print something"
+    debug:
+      msg: "test"
+    when:  ansible_distribution == 'Ubuntu'
