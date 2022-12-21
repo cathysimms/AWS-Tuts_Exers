@@ -1,0 +1,51 @@
+Resources:
+  NewVPC:
+    Type: AWS::EC2::VPC
+    Properties:
+      CidrBlock: 10.0.0.0/16
+
+  NewSubnet:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref NewVPC
+      CidrBlock: 10.0.0.0/24
+      MapPublicIpOnLaunch: true
+
+  NewSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: Allow SSH access
+      VpcId: !Ref NewVPC
+      SecurityGroupIngress:
+      - IpProtocol: tcp
+        FromPort: '22'
+        ToPort: '22'
+        CidrIp: 0.0.0.0/0
+
+  InternetGateway:
+    Type: AWS::EC2::InternetGateway
+    Properties:
+      Tags:
+      - Key: Foo
+        Value: Bar
+
+  AttachGateway:
+    Type: AWS::EC2::VPCGatewayAttachment
+    Properties:
+      VpcId:
+        Ref: NewVPC
+      InternetGatewayId:
+        Ref: InternetGateway
+      
+  NewInstance:
+    Type: AWS::EC2::Instance
+    Properties:
+      KeyName: AMSkey
+      ImageId: ami-05e786af422f8082a
+      InstanceType: t2.micro
+      # SecurityGroupIds:
+      #   - sg-0e85599464176ab57
+      SecurityGroupIds: 
+        - !Ref NewSecurityGroup
+      SubnetId: !Ref NewSubnet
+      
