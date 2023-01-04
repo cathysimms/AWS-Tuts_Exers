@@ -2,7 +2,7 @@ terraform {
     required_providers {
         aws = {
             source =  "hashicorp/aws"
-            cersion = "~> 4.0"
+            version = "~> 4.0"
 
         }
     }
