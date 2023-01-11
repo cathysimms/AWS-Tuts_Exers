@@ -129,7 +129,6 @@ dmypy.json
 .pyre/
 
 #terraform
-*.hcl
 *.tfstate
 *.tfstate.backup
 .terraform
