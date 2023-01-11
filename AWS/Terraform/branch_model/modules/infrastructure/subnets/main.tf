@@ -1,17 +1,26 @@
-resource "aws_subnet" "public_subnet" {
+# resource "aws_subnet" "public_subnet" {
+#     vpc_id = "${var.vpc_id}"
+#     cidr_block = "10.0.0.0/24"
+
+#     tags = {
+#         Name = "${var.environment}-${var.region}-Public_Subnet"
+#     }
+# }
+
+# resource "aws_subnet" "private_subnet" {
+#     vpc_id = "${var.vpc_id}"
+#     cidr_block = "10.0.1.0/24"
+
+#     tags = {
+#         Name = "${var.environment}-${var.region}-Private-Subnet"
+#     }
+# }
+
+resource "aws_subnet" "subnets" {
     vpc_id = "${var.vpc_id}"
-    cidr_block = "10.0.0.0/24"
-
+    for_each = var.subnet_vars
+    cidr_block = each.value.cidr
     tags = {
-        Name = "${var.environment}-${var.region}-Public_Subnet"
-    }
-}
-
-resource "aws_subnet" "private_subnet" {
-    vpc_id = "${var.vpc_id}"
-    cidr_block = "10.0.1.0/24"
-
-    tags = {
-        Name = "${var.environment}-${var.region}-Private-Subnet"
+        Name = "${var.environment}-${var.region}-${each.value.type}-Subnet"
     }
 }
